@@ -1,0 +1,45 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+<form class="form-horizontal" action="./add" method="post">
+  <div class="form-group">
+    <label for="inputName" class="col-sm-2 control-label">名称</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputName" name="name" placeholder="Name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputLongitude" class="col-sm-2 control-label">经度</label>
+    <div class="col-sm-10">
+      <input type="float" class="form-control" id="inputLongitude" name="longitude" placeholder="经度">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputLatitude" class="col-sm-2 control-label">纬度</label>
+    <div class="col-sm-10">
+      <input type="float" class="form-control" id="inputLatitude" name="latitude" placeholder="纬度" >
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputLatitude" class="col-sm-2 control-label">标签</label>
+    <div class="col-sm-10">
+      <select class="form-control" name="lable" id="inputLable">
+        <option value="makerspace">makerspace/hackerspace/fablab/.etc</option>
+        <option value="market">electics market/woodmarket/</option>
+        <option value="factory">factory</option>
+        <option value="food">good and cheep food</option>
+        <option value="other">other importment place</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputDesc" class="col-sm-2 control-label">简介</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" id="inputDesc" name="desc"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">保存</button>
+    </div>
+  </div>
+</form>
