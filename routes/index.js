@@ -1,11 +1,12 @@
 var express = require('express');
-var passport = require('passport');
-var Account = require('../models/account');
 // Mongo connect
 // var MongoClient = require('mongodb').MongoClient
 //   , assert = require('assert');
 
 var router = express.Router();
+
+var passportGithub = require('../auth/github');
+
 // var mongoutils = require('./mongoutils.js');
 
 // console.log(mongoutils.url);
@@ -49,13 +50,14 @@ router.post('/register', function(req, res) {
     });
 });
 
-router.get('/login', function(req, res) {
-    res.render('login', { user : req.user });
+router.get('/login', function(req, res,next) {
+    res.send('Go back and register!');
+    //res.render('login', { user : req.user });
 });
 
-router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/');
-});
+// router.post('/login', passport.authenticate('local'), function(req, res) {
+//     res.redirect('/');
+// });
 
 router.get('/logout', function(req, res) {
     req.logout();
@@ -65,5 +67,15 @@ router.get('/logout', function(req, res) {
 router.get('/ping', function(req, res){
     res.status(200).send("pong!");
 });
+
+
+router.get('/auth/github', passportGithub.authenticate('github', { scope: [ 'user:email' ] }));
+
+router.get('/auth/github/callback',
+  passportGithub.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication
+    res.json(req.user);
+  });
 
 module.exports = router;
