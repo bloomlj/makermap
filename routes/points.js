@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
+
 
  // Mongo connect
 var MongoClient = require('mongodb').MongoClient
@@ -35,7 +37,7 @@ router.get('/map', function(req, res, next) {
 
 /* GET points json page. */
 router.get('/json', function(req, res, next) {
-
+  console.dir(req.user);
   MongoClient.connect(mongoutils.url, function(err, db) {
     assert.equal(null, err);
     console.log("Connected correctly to server");
@@ -55,6 +57,7 @@ router.get('/json', function(req, res, next) {
 });
 /* GET add page. */
 router.get('/add', function(req, res, next) {
+  if(!req.user) res.redirect('/login');
   res.render('points/add', { title: 'Express' });
 });
 /* GET add page. */
